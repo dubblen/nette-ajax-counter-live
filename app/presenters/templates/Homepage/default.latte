@@ -1,0 +1,47 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+
+<div class="content">
+	<div id="banner">
+		<h1 n:block=title>Nette clicker!!!</h1>
+	</div>
+
+	{snippet counter}
+        <div class="counter">{$counter}</div>
+    {/snippet}
+
+    <div><a class="click-btn ajax" n:href="counterClick!">Click me!</a></div>
+    <div>
+        <button id="js-click">JS CLICK</button>
+    </div>
+</div>
+
+
+{/block}
+
+{block scripts}
+{include parent}
+
+    <script n:syntax="double" type="text/javascript">
+
+        setInterval(function () {
+            $.nette.ajax({
+                url: {{link counterClick!}},
+                success: function () {
+                    console.log('success');
+                }
+            });
+        }, 2000);
+
+        $('#js-click').click(function() {
+            $.nette.ajax({
+                url: {{link counterClick!}},
+                success: function () {
+                    console.log('success');
+                }
+            });
+        });
+    </script>
+
+{/block}

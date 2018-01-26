@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+
+	<style>
+		body {
+			font-family: Arial;
+		}
+		.flash {
+			display: block;
+			background-color: #ffff56;
+			border-radius: 10px;
+			padding: 5px 15px;
+			border: solid 1px #000;
+			margin: 10px;
+			color: #000;
+		}
+		.content {
+			width: 450px;
+			background: #ff76fb;
+			margin: 30px auto;
+			text-align: center;
+			padding: 10px 30px;
+		}
+	</style>
+
+</head>
+
+<body>
+	{snippet flash}
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	{/snippet}
+	{include content}
+
+	{block scripts}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+	<script src="{$basePath}/js/nette.ajax.js"></script>
+
+	<script type="text/javascript">
+        $(function () {
+            $.nette.init();
+        });
+	</script>
+	{/block}
+</body>
+</html>
